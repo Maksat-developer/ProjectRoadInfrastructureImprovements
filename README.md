@@ -8,6 +8,7 @@ virtualenv venv
 python3 -m venv venv 
 
 # Activate Virtual Enviroments
+
 source venv/bin/activate
 ------------------------------
 . ./venv/bin/activate
