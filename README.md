@@ -1,8 +1,6 @@
 # Clone Project
-git clone 
-cd 
-
-
+git clone git@github.com:Maksat-developer/ProjectRoadInfrastructureImprovements.git
+cd ProjectRoadInfrastructureImprovements
 
 # Create Virtual Enviroments
 virtualenv venv
