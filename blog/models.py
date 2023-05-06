@@ -21,5 +21,5 @@ class MessageModel(models.Model):
         choices = LEVEL_CHOICES,
          default = '1'        
         )
-    quantity = models.IntegerField(verbose_name='')#    ??????
+    quantity = models.IntegerField(verbose_name='')#    ???????
     
