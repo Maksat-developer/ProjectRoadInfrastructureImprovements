@@ -12,16 +12,15 @@ LEVEL_CHOICES = (
 
 class MessageModel(models.Model):
 
-    description = models.CharField(max_length=250,verbose_name='Описание')
+    description = models.TextField(max_length=250,verbose_name='Описание')
     image = models.ImageField(upload_to ='media/%Y/%m/%d',verbose_name='Изображение')
-    is_active = models.BooleanField(default=False,verbose_name='')
-    category = models.ForeignKey('Category',max_length=100,on_delete = models.SET_NULL ,verbose_name='Категория')
+    category = models.ForeignKey('Category',max_length=100,on_delete = models.CASCADE ,verbose_name='Категория')
     created_at = models.DateField(auto_now=True,verbose_name='Дата заявки')
     is_renovated = models.BooleanField(default=False,verbose_name='Отремонтирован')   #Отремонтирована или нет
-    choise = models.CharField(
+    choices = models.CharField(
         max_length=5,
         choices = LEVEL_CHOICES,
          default = '1'        
         )
-    quantity = models.IntegerField(verbose_name='')#??????
+    quantity = models.IntegerField(verbose_name='')#    ??????
     
