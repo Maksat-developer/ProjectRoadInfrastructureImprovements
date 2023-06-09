@@ -1,27 +1,42 @@
 from django.db import models
 
 
-LEVEL_CHOICES = (
-    ('1','нормально')
-    ('2','не опасный')
-    ('3','умеренный')
-    ('4','опасный')
-    ('5','очень опасный')
-)
+LEVEL_CHOICES = [
+    ('1','1'),#нормально
+    ('2','2'),#не опасный
+    ('3','3'),#умеренный
+    ('4','4'),#опасный
+    ('5','5'),#очень опасный
+]
+
+
+class ComentModel(models.Model):
+    title = models.CharField(max_length=100,verbose_name='Заголовок')
+    message = models.ForeignKey('MessageModel',on_delete=models.CASCADE,verbose_name='Сообщение')
+    # user = models.ForeignKey('User',on_delete=)
+    description = models.TextField(verbose_name='Описание')
+    datetime = models.DateField(auto_now_add=True)
+    is_active = models.BooleanField(default=True,verbose_name='is like or dislike')
 
 
 class MessageModel(models.Model):
 
-    description = models.CharField(max_length=250,verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to ='media/%Y/%m/%d',verbose_name='Изображение')
-    is_active = models.BooleanField(default=False,verbose_name='')
-    category = models.ForeignKey('Category',max_length=100,on_delete = models.SET_NULL ,verbose_name='Категория')
+    category = models.ForeignKey('CategoryModel',on_delete = models.CASCADE ,verbose_name='Категория')
     created_at = models.DateField(auto_now=True,verbose_name='Дата заявки')
     is_renovated = models.BooleanField(default=False,verbose_name='Отремонтирован')   #Отремонтирована или нет
-    choise = models.CharField(
-        max_length=5,
+    choices = models.CharField(
+        max_length=1,
         choices = LEVEL_CHOICES,
-         default = '1'        
+        default = '1',
+        verbose_name='Уровень угрозы'        
         )
-    quantity = models.IntegerField(verbose_name='')#??????
-    
+    quantity = models.IntegerField(verbose_name='количество')#    ???????
+
+    def __str__(self) -> str:
+        return self.description
+
+class CategoryModel(models.Model):
+    name = models.CharField(max_length=100,verbose_name='наименовоание')
+    slug = models.SlugField(max_length=100,verbose_name='Slug')
